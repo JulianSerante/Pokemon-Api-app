@@ -40,6 +40,8 @@ const getPokemonByNameHandler = async (req, res) => {
 
         pokemonDB ? pokemon = pokemonDB : pokemon = await getPokemonByName(name);
 
+        if(!pokemon) throw new Error(`El Pokemon con nombre ${name} no existe`)
+
         return res.status(200).json(pokemon);
         
     } catch (error) {

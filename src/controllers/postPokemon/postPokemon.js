@@ -1,6 +1,6 @@
 const { Pokemon, Type } = require('../../db');
 
-const postPokemon = async (name, sprites, hp, attack, defense, speed, height, weight, typeIds) => {
+const postPokemon = async (name, image, hp, attack, defense, speed, height, weight, typeIds) => {
     try {
         const lastPokemon = await Pokemon.findOne({
           order: [['id', 'DESC']],
@@ -17,7 +17,7 @@ const postPokemon = async (name, sprites, hp, attack, defense, speed, height, we
           {
             id: nextId,
             name,
-            sprites,
+            image,
             hp,
             attack,
             defense,
@@ -27,9 +27,12 @@ const postPokemon = async (name, sprites, hp, attack, defense, speed, height, we
           }
         );
 
-        await newPokemon.addType(typeIds);
-        
+        for(const typeId of typeIds){
+          const type = await Type.findByPk(typeId);
+          if(type) await newPokemon.addType(type);
+        }  
         return newPokemon;
+        
       } catch (error) {
         return { error: error.message };
       }

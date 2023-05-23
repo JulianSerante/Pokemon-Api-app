@@ -11,7 +11,7 @@ const getPokemonByNameFromDB = async (name) => {
             const pokemon = {
                 id: pokemonDB.id,
                 name: pokemonDB.name,
-                sprites: pokemonDB.sprites,
+                image: pokemonDB.image,
                 hp: pokemonDB.hp,
                 attack: pokemonDB.attack,
                 defense: pokemonDB.defense,

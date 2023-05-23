@@ -13,14 +13,14 @@ const getPokemonById = async (id) => {
         const defense = data.stats.find(stat => stat.stat.name === 'defense').base_stat;
         const speed = data.stats.find(stat => stat.stat.name === 'speed').base_stat;
         const type = data.types.map(typePokemon => {
-                return typePokemon.type.name
+                return typePokemon.type
             })
         
 
         const pokemon = {
             id: data.id,
-            name: data.name,
-            type: type,
+            name: data.name.toUpperCase(),
+            types: type,
             image: data.sprites.other['official-artwork'].front_default,
             hp: hp,
             attack: attack,

@@ -1,9 +1,14 @@
-const { Pokemon } = require('../../db');
+const { Pokemon, Type } = require('../../db');
 const getPokemonFromAPI = require('./getPokemonFromAPI')
 
 const getPokemon = async () => {
     try {
-        const pokemonDB = await Pokemon.findAll()
+        const pokemonDB = await Pokemon.findAll({
+            include: {
+              model: Type,
+              attributes: ['name'],
+            },
+          });
 
         const pokemonAPI = await getPokemonFromAPI()
 

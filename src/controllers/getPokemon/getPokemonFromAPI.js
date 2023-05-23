@@ -10,7 +10,7 @@ const getPokemonFromAPI = async () => {
         const countResponse = await axios.get(ENDPOINT);
         pokemonCount = countResponse.data.count;
 
-        while (offset < pokemonCount && pokemons.length < 60) {
+        while (offset < pokemonCount && pokemons.length < 61) {
             const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
             const pokemonList = response.data.results;
       
@@ -22,14 +22,14 @@ const getPokemonFromAPI = async () => {
             offset += limit;
           } 
           
-          const pokemonApi = pokemons.slice(0, 59).map(pokemon => {
+          const pokemonApi = pokemons.slice(0, 60).map(pokemon => {
             const { id, name, sprites, stats, height, weight, types } = pokemon;
             const hp = stats.find(stat => stat.stat.name === 'hp').base_stat;
             const attack = stats.find(stat => stat.stat.name === 'attack').base_stat;
             const defense = stats.find(stat => stat.stat.name === 'defense').base_stat;
             const speed = stats.find(stat => stat.stat.name === 'speed').base_stat;
             const type = types.map(typePokemon => {
-                return typePokemon.type.name
+                return typePokemon.type
             }
         )
             
@@ -38,7 +38,7 @@ const getPokemonFromAPI = async () => {
             return {
                 id,
                 name,
-                type: type,
+                types: type,
                 image: sprites.other['official-artwork'].front_default,
                 hp,
                 attack,

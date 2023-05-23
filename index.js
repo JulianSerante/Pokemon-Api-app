@@ -20,13 +20,13 @@
 require('dotenv').config();
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
-const getTypesHandler = require('./src/handlers/getTypes.js');
+const saveTypes = require('./src/controllers/getTypes/saveTypes.js');
 const { PORT } = process.env;
 
 
 // Syncing all the models at once.
-conn.sync({ alter: true }).then( () => {
-
+conn.sync({ force: true }).then( async () => {
+  await saveTypes(); 
   server.listen(PORT, () => {
     console.log(`Server raised on port: ${PORT}`); // eslint-disable-line no-console
   });
