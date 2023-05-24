@@ -1,5 +1,5 @@
 const axios = require('axios');
-const ENDPOINT = 'https://pokeapi.co/api/v2/pokemon';
+const { ENDPOINT } = process.env;
 
 const getPokemonByName = async (name) => {
     try {
