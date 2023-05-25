@@ -32,22 +32,20 @@ const getPokemonByIdHandler = async (req, res) => {
 
 const getPokemonByNameHandler = async (req, res) => {
     const { name } = req.query;
-    console.log(name);
+  
     try {
-        let pokemon;
 
-        const pokemonDB = await getPokemonByNameFromDB(name);
+      let pokemon;
+      const pokemonDB = await getPokemonByNameFromDB(name);
+      pokemonDB ? pokemon = pokemonDB : pokemon = await getPokemonByName(name)
+      return res.status(200).json(pokemon);
 
-        pokemonDB ? pokemon = pokemonDB : pokemon = await getPokemonByName(name);
-
-        if(!pokemon) throw new Error(`El Pokemon con nombre ${name} no existe`)
-
-        return res.status(200).json(pokemon);
-        
     } catch (error) {
-        return res.status(404).json({error: error.message});
+
+      return res.status(404).json({ error: error.message });
+      
     }
-}
+  };
 
 
 module.exports = {

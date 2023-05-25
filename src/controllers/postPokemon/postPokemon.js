@@ -16,7 +16,7 @@ const postPokemon = async (name, image, hp, attack, defense, speed, height, weig
         const newPokemon = await Pokemon.create(
           {
             id: nextId,
-            name,
+            name: name.toLowerCase(),
             image,
             hp,
             attack,

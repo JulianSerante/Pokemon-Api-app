@@ -7,7 +7,6 @@ const validate = (req, res, next) => {
     const {name, image, hp, attack, defense, speed, height, weight, typeIds} = req.body;
     if(!name || !image || !hp || !attack || !defense || !typeIds)
     return res.status(400).json('Faltan datos del Pokemon');
-
     next();
 }
 
