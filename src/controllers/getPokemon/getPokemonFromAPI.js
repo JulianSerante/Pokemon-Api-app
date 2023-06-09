@@ -2,7 +2,7 @@ const axios = require('axios');
 const { ENDPOINT } = process.env;
 
 const getPokemonFromAPI = async () => {
-    const limit = 20;
+        const limit = 20;
         let offset = 0;
         let pokemonCount = 0;
         let pokemons = [];
@@ -11,9 +11,8 @@ const getPokemonFromAPI = async () => {
         pokemonCount = countResponse.data.count;
 
         while (offset < pokemonCount && pokemons.length < 61) {
-            const response = await axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
+            const response = await axios.get(`${ENDPOINT}?offset=${offset}&limit=${limit}`);
             const pokemonList = response.data.results;
-      
             const promises = pokemonList.map(pokemon => axios.get(pokemon.url));
             const responses = await Promise.all(promises);
             const groupOfPokemons = responses.map(response => response.data);

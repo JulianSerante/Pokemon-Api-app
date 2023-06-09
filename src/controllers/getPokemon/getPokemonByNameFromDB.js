@@ -10,7 +10,6 @@ const getPokemonByNameFromDB = async (name) => {
         attributes: ['name'],
       },
     });
-    console.log(pokemonDB);
     return pokemonDB;
   };
   
